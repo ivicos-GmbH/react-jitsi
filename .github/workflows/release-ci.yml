@@ -51,3 +51,31 @@ jobs:
       with:
         token: ${{ secrets.NPM_TOKEN }}
         access: public
+  create_release:
+    - uses: actions/checkout@v2
+    - id: changelog_reader
+      name: Get Changelog Entry
+      uses: mindsers/changelog-reader-action@v2
+      with:
+        path: ./CHANGELOG.md
+    - name: Create tag
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: "refs/tags/ivicos_${{ steps.changelog_reader.outputs.version }}",
+            sha: context.sha
+          })
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ivicos_${{ steps.changelog_reader.outputs.version }}
+        tag_name: ivicos_${{ steps.changelog_reader.outputs.version }}
+        body: ${{ steps.changelog_reader.outputs.changes }}
+        prerelease: ${{ steps.changelog_reader.outputs.status == 'prereleased' }}
+        draft: ${{ steps.changelog_reader.outputs.status == 'unreleased' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
