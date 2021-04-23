@@ -42,7 +42,7 @@ jobs:
     - run: npm run lint
   publish_dry_run:
     name: Testing and assessing publication to NPM (dry run)
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1

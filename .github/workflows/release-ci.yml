@@ -52,6 +52,9 @@ jobs:
         token: ${{ secrets.NPM_TOKEN }}
         access: public
   create_release:
+    name: Create tag and release 
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
     - id: changelog_reader
       name: Get Changelog Entry
