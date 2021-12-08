@@ -27,6 +27,10 @@ const Jitsi: React.FC<Props> = (props: Props) => {
 
   const Loader = loadingComponent || Default.Loader;
 
+  
+
+  
+
   const startConference = (JitsiMeetExternalAPI: any): void => {
     try {
       console.log("interfaceConfig", interfaceConfig);
@@ -49,6 +53,12 @@ const Jitsi: React.FC<Props> = (props: Props) => {
         throw new Error("Failed to create JitsiMeetExternalAPI istance");
 
       if (onAPILoad) onAPILoad(api);
+
+      window.addEventListener('message', event => {
+        // IMPORTANT: check the origin of the data! 
+          api.executeCommand('toggleShareScreen');
+        
+      }); 
 
       api.addEventListener("videoConferenceJoined", () => {
         setLoading(false);
