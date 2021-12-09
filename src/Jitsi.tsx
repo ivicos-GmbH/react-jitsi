@@ -33,7 +33,7 @@ const Jitsi: React.FC<Props> = (props: Props) => {
 
   const startConference = (JitsiMeetExternalAPI: any): void => {
     try {
-      console.log("interfaceConfig", interfaceConfig);
+      console.log("we are on he right branch!", interfaceConfig);
       console.log("we are on he right branch!");
 
       const options: JitsiMeetAPIOptions = {
