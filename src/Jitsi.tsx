@@ -34,6 +34,7 @@ const Jitsi: React.FC<Props> = (props: Props) => {
   const startConference = (JitsiMeetExternalAPI: any): void => {
     try {
       console.log("interfaceConfig", interfaceConfig);
+      console.log("we are on he right branch!");
 
       const options: JitsiMeetAPIOptions = {
         roomName,
@@ -56,6 +57,7 @@ const Jitsi: React.FC<Props> = (props: Props) => {
 
       window.addEventListener('message', event => {
         // IMPORTANT: check the origin of the data! 
+          console.log('message received!');
           api.executeCommand('toggleShareScreen');
           console.log(event);
       }); 
