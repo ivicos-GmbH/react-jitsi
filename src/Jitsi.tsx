@@ -57,7 +57,7 @@ const Jitsi: React.FC<Props> = (props: Props) => {
       window.addEventListener('message', event => {
         // IMPORTANT: check the origin of the data! 
           api.executeCommand('toggleShareScreen');
-        
+          console.log(event);
       }); 
 
       api.addEventListener("videoConferenceJoined", () => {
